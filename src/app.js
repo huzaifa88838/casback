@@ -8,7 +8,7 @@ const app = express();
 
 
 app.use(cors({
-    origin:["https://azadealfrontend.vercel.app"],
+    origin:["https://www.azadeducation.com"],
     // origin: ["https://azaddeal.com", "https://www.azaddeal.com"], // ✅ Both with and without "www"
     methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allowed HTTP Methods
 
