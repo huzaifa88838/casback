@@ -152,7 +152,22 @@ const getApprovedUsers = asynchandler(async (req, res) => {
 
     return res.status(200).json(new apiresponse(200, approvedUsers, "Approved users fetched successfully"));
 });
+const getSingleUser = asynchandler(async (req, res) => {
+    const { id } = req.params;
 
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new apierror(400, "Invalid user ID format");
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+        throw new apierror(404, "User not found");
+    }
+
+    return res.status(200).json(new apiresponse(200, user, "User fetched successfully"));
+});
 
 const loginuser = asynchandler(async(req,res)=>{
 
@@ -470,7 +485,8 @@ export{
     calwatchhistory,
     getAllUsers,
     approveUser,
-    getApprovedUsers
+    getApprovedUsers,
+    getSingleUser 
     
     
 
