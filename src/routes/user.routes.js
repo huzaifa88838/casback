@@ -1,6 +1,6 @@
 import express from 'express'
 import { Router } from 'express'
-import { registerUser,loginuser,logout,getApprovedUsers, approveUser,rreshtokens, changepassword, currentuser, changeuser, updatedavtar, updatedcoverimage, subscribtionbased, calwatchhistory,getAllUsers, getSingleUser } from '../controllers/usser.controller.js'
+import { registerUser,loginuser,logout,getApprovedUsers, approveUser,rreshtokens, changepassword, currentuser, changeuser, updatedavtar, updatedcoverimage, subscribtionbased, calwatchhistory,getAllUsers } from '../controllers/usser.controller.js'
 import {upload} from '../middlewares/multer.middleware.js'
 import { logouting } from '../middlewares/auth.middleware.js'
 import { uploadoncloudinary } from '../utils/cloudinary.js'
@@ -35,7 +35,6 @@ router.route("/getallapproved").get( getApprovedUsers )
 router.route("/createcourse").post(upload.fields([{name:"thumbnail",maxCount:1},{name:"videoFile",maxCount:1}]),createCourse)
 router.route("/getcourse").get(getAllCourses)
 router.route("/getsinglecourse/:id").get(getSingleCourse )
-router.route('/getsingleuser/:id').get(getSingleUser)
 
 router.post("/file", upload.single("file"), async (req, res) => {
     try {

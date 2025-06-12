@@ -18,7 +18,7 @@ connectdb()
 
     const io = new Server(server, {
       cors: {
-        origin: "https://azadealfrontend.vercel.app", 
+        origin: "https://www.azadeducation.com", 
         methods: ["GET", "POST"],
         credentials: true,
       },
