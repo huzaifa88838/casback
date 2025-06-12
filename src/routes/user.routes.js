@@ -1,22 +1,23 @@
 import express from 'express'
 import { Router } from 'express'
-import { registerUser,loginuser,logout,getApprovedUsers, approveUser,rreshtokens, changepassword, currentuser, changeuser, updatedavtar, updatedcoverimage, subscribtionbased, calwatchhistory,getAllUsers } from '../controllers/usser.controller.js'
+import { registerUser,loginuser,logout,getApprovedUsers, approveUser,rreshtokens, changepassword, currentuser, changeuser, updatedavtar, updatedcoverimage, subscribtionbased, calwatchhistory,getAllUsers, getSingleUser } from '../controllers/usser.controller.js'
 import {upload} from '../middlewares/multer.middleware.js'
 import { logouting } from '../middlewares/auth.middleware.js'
 import { uploadoncloudinary } from '../utils/cloudinary.js'
 import { createZoomMeetingHandler } from '../services/zoomService.js';
-
+import { enrollStudent,getAllEnrolledStudents } from '../controllers/enrollment.controller.js'
 import { createCourse,getAllCourses,getSingleCourse } from '../controllers/courses.controller.js'
+
 const router = Router()
-router.route("/register").post(
-    upload.fields([
-        // { name: 'profilePicture', maxCount: 1 },
-        { name: 'cnicFront', maxCount: 1 },
-        { name: 'cnicBack', maxCount: 1 },
-        { name: 'lastDegree', maxCount: 1 },
-         { name: 'profilePicture', maxCount: 1 },
-    ]),
-    registerUser
+router.post(
+  '/register',
+  upload.fields([
+    { name: 'profilePicture', maxCount: 1 },
+    { name: 'cnicFront', maxCount: 1 },
+    { name: 'cnicBack', maxCount: 1 },
+    { name: 'lastDegree', maxCount: 1 },
+  ]),
+  registerUser
 );
 router.route("/login").post(loginuser)
 router.route("/logout").post(logouting,logout)
@@ -34,6 +35,7 @@ router.route("/getallapproved").get( getApprovedUsers )
 router.route("/createcourse").post(upload.fields([{name:"thumbnail",maxCount:1},{name:"videoFile",maxCount:1}]),createCourse)
 router.route("/getcourse").get(getAllCourses)
 router.route("/getsinglecourse/:id").get(getSingleCourse )
+router.route('/getsingleuser/:id').get(getSingleUser)
 
 router.post("/file", upload.single("file"), async (req, res) => {
     try {
@@ -64,6 +66,6 @@ router.post("/file", upload.single("file"), async (req, res) => {
       res.status(500).json({ error: 'Meeting creation failed' });
     }
   });
-  
-
+  router.route("/enroll").post(enrollStudent)
+  router.route("/enrollments").get(getAllEnrolledStudents)
 export{router}
