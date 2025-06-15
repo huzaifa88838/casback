@@ -8,6 +8,7 @@ const enrollmentSchema = new mongoose.Schema({
   },
   instructorId: String,
   paymentMethod: String,
+  coursePrice: Number, 
   timestamp: { type: Date, default: Date.now }
 });
 

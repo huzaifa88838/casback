@@ -8,7 +8,8 @@ const app = express();
 
 
 app.use(cors({
-    origin:["https://www.azadeducation.com"],
+    // origin:["https://www.azadeducation.com"],
+    origin:['http://localhost:5173'],
     // origin: ["https://azaddeal.com", "https://www.azaddeal.com"], // ✅ Both with and without "www"
     methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allowed HTTP Methods
 

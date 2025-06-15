@@ -5,7 +5,7 @@ import {upload} from '../middlewares/multer.middleware.js'
 import { logouting } from '../middlewares/auth.middleware.js'
 import { uploadoncloudinary } from '../utils/cloudinary.js'
 import { createZoomMeetingHandler } from '../services/zoomService.js';
-import { enrollStudent,getAllEnrolledStudents } from '../controllers/enrollment.controller.js'
+import { enrollStudent,getAllEnrolledStudents,getInstructorRevenue } from '../controllers/enrollment.controller.js'
 import { createCourse,getAllCourses,getSingleCourse } from '../controllers/courses.controller.js'
 
 const router = Router()
@@ -67,4 +67,5 @@ router.post("/file", upload.single("file"), async (req, res) => {
   });
   router.route("/enroll").post(enrollStudent)
   router.route("/enrollments").get(getAllEnrolledStudents)
+  router.route("/revenue").get(getInstructorRevenue)
 export{router}
